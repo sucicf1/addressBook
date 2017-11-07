@@ -1,0 +1,86 @@
+﻿@model IEnumerable<addressBook.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("findInName")
+        <input type="submit">
+    </p>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by surname: @Html.TextBox("findInSurname")
+        <input type="submit">
+    </p>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+    Find by phone number: @Html.TextBox("findInPhoneNumber")
+    <input type="submit">
+    </p>
+}
+<p> Click edit to edit user data and add or change user phone numbers</p>
+<p>
+    @Html.ActionLink("Create New User", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        @if (ViewBag.isSearchedByNumber) { <th> Found number</th>}
+        else { <th> Default number</th>}
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumbers.ElementAt(0).Number)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+        </td>
+    </tr>
+}
+
+</table>
