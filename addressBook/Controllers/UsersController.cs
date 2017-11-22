@@ -21,9 +21,8 @@ namespace addressBook.Controllers
             if (!String.IsNullOrEmpty(findInPhoneNumber))
             {
                 ViewBag.isSearchedByNumber = true;
-                var phoneNumbers = db.PhoneNumbers.ToList();
                 var searchedNumber = findInPhoneNumber.ToString();
-                var phoneNumbersMatch = phoneNumbers.Where(
+                var phoneNumbersMatch = db.PhoneNumbers.Where(
                                             p => p.Number.ToString().Contains(searchedNumber)).ToList();
 
                 users.Clear();
